@@ -7,4 +7,5 @@ When policies have not yet been implemented, the optimistic assumption that such
 
 ![](plots/stay-at-home.png)
 ![](plots/non-essential.png)
+![](plots/evictions.png)
 ![](plots/state-of-emergency.png)
