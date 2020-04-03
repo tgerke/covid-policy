@@ -108,3 +108,10 @@ dat %>%
     panel.spacing.y = unit(0.5, "line")
   )
   
+ggsave(here::here("plots", "stay-at-home.png"), 
+       device = "png",
+       width = 8,
+       height = 9,
+       units = "in")
+
+
