@@ -40,8 +40,6 @@ date_diff <- dat %>%
   round(1)
 
 dat %>% 
-  mutate(enacted = 
-         !`State of emergency` == lubridate::as_datetime(today() + 7)) %>%
   left_join(gov, by = "State") %>%
   arrange(Party, `State of emergency`, State) %>% 
   mutate_at(vars(State), forcats::fct_inorder) %>% 
@@ -49,11 +47,9 @@ dat %>%
   geom_point(
     aes(x = `State of emergency`,
         y = State,
-        color = Party,
-        alpha = enacted),
+        color = Party),
     show.legend = FALSE) +
   scale_color_manual(values = party_colors) +
-  scale_alpha_discrete(range = c(.4, 1)) +
   geom_vline(xintercept = lubridate::as_datetime(today()), 
              color = "gray50", 
              linetype = "dashed") + 
