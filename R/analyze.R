@@ -61,11 +61,13 @@ dat %>%
   ylab(element_blank()) + 
   geom_curve(
     data = tibble(
-      x = lubridate::as_datetime(today() - 1.5),
-      y = 5,
-      xend = lubridate::as_datetime(today()), 
-      yend = 2.5,
-      Party = "Democratic"),
+      x = c(lubridate::as_datetime(today() - 1.5), 
+            lubridate::as_datetime(today() + 6.8)),
+      y = c(5, 25),
+      xend = c(lubridate::as_datetime(today()),
+               lubridate::as_datetime(today() + 5.5)), 
+      yend = c(2.5, 24),
+      Party = c("Democratic", "Republican")),
     aes(x = x, y = y, xend = xend, yend = yend),
     size = .3,
     curvature = .5,
@@ -73,11 +75,13 @@ dat %>%
     arrow = arrow(length = unit(.1, "cm"))) + 
   geom_text(
     data = tibble(
-      x = lubridate::as_datetime(today() - 1.5),
-      y = 5.7,
-      Party = "Democratic"
+      x = c(lubridate::as_datetime(today() - 1.5), 
+            lubridate::as_datetime(today() + 5)),
+      y = c(5.7, 23.5),
+      Party = c("Democratic", "Republican"),
+      label = c("Today", "Not yet enacted")
     ),
-    aes(x = x, y = y, label = "Today"), 
+    aes(x = x, y = y, label = label), 
     size = 3,
     color = "gray50") +
   facet_wrap(vars(Party), ncol = 1, scales = "free_y") + 
