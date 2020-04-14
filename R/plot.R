@@ -32,16 +32,16 @@ gov <- read_rds(here::here("data-snapshots/gov_2020-04-02_2107EST.rds"))
 ihme <- read_csv(
   here::here("data-snapshots/IHME_Hospitalization_all_locs_2020-04-14.csv")) 
 # filter to final date and select cumulative death variables
-ihme <- ihme %>%
-  group_by(location_name) %>% 
-  filter(date == max(date)) %>% 
-  ungroup() %>%
-  rename(State = location_name, deaths_est = totdea_mean) %>% 
-  select(State, deaths_est, totdea_lower, totdea_upper)
-
-dat <- dat %>% 
-  left_join(ihme, by = "State") %>%
-  mutate(deaths_per_capita = deaths_est/`Population 2018`)
+# ihme <- ihme %>%
+#   group_by(location_name) %>% 
+#   filter(date == max(date)) %>% 
+#   ungroup() %>%
+#   rename(State = location_name, deaths_est = totdea_mean) %>% 
+#   select(State, deaths_est, totdea_lower, totdea_upper)
+# 
+# dat <- dat %>% 
+#   left_join(ihme, by = "State") %>%
+#   mutate(deaths_per_capita = deaths_est/`Population 2018`)
 
 party_colors <- c(Democratic = "#2E74C0", Republican = "#CB454A")
 
@@ -118,15 +118,15 @@ plot_action_timeline <- function(dat, action, action_label = NULL) {
   g <- g + if (!all_enacted) {
     geom_point(
       aes(color = Party,
-          alpha = enacted,
-          size = deaths_per_capita),
+          alpha = enacted),
+          #size = deaths_per_capita),
       show.legend = FALSE)
   } else {
     geom_point(
       aes(x = !!action,
           y = State,
-          color = Party,
-          size = deaths_per_capita),
+          color = Party),
+          #size = deaths_per_capita),
       show.legend = FALSE)
   }
   
